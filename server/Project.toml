@@ -1,0 +1,14 @@
+name = "server"
+uuid = "8c7cc9c5-1a96-4922-ad28-500fcd3d2397"
+authors = ["panzertime <panzer.time@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+HttpCommon = "77172c1b-203f-54ac-aa54-3f1198fe9f90"
+JSONTables = "b9914132-a727-11e9-1322-f18e41205b0b"
+Mux = "a975b10e-0019-58db-a62f-e48ff68538c9"
+SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"

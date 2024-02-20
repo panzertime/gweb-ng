@@ -1,0 +1,1 @@
+It looks like I can do multithreading by executing multiple copies of the server on different ports (eg 8010, 8011, 8012, 8013...) and use nginx to load-balance between them. There's nothing like gunicorn for Julia, out of the box.
