@@ -27,6 +27,17 @@ episodesStmt = SQLite.Stmt(db, "SELECT e.id, e.title, e.published, e.description
                 " ORDER BY e.published DESC"
 )
 
+mostRecentStmt = SQLite.Stmt(db, "SELECT e.id, e.title, e.published, e.description_html, j.pathname"*
+                " FROM episode e"*
+                " JOIN (SELECT  episode.id, download_folder || \"/\" || download_filename as pathname"*
+                "        FROM episode"*
+                "        JOIN podcast"*
+                "        ON podcast.id=episode.podcast_id) j"*
+                " ON j.id = e.id"*
+                " ORDER BY e.published DESC"*
+                " LIMIT 25"
+)
+
 function podListQuery()::AbstractString
     df = DataFrame(con.execute(podStmt))
     df_plusPages = select(df, :, :epcount => ByRow(epcount -> ceil(Integer, epcount / 25)) => :pagecount)
@@ -35,6 +46,11 @@ end
 
 function epsListQuery(pod_id::Integer)::AbstractString
     df = DataFrame(con.execute(episodesStmt, [pod_id]))
+    return arraytable(df)
+end
+
+function mostRecentQuery()::AbstractString
+    df = DataFrame(con.execute(mostRecentStmt))
     return arraytable(df)
 end
 

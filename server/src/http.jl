@@ -7,6 +7,10 @@ function getPodList()::AbstractString
     return podListQuery()
 end
 
+function getMostRecent()::AbstractString
+    return mostRecentQuery()
+end
+
 function getEpList(pod_id::AbstractString)::AbstractString
     return getEpList(tryparse(Integer, pod_id))
 end
@@ -55,6 +59,7 @@ end
 @app gweb = (
     Mux.defaults,
     page("/pods", res -> withJsonHeader(getPodList())),
+    page("/episodes", req -> withJsonHeader(getMostRecent())),
     page("/episodes/:pod_id", req -> withJsonHeader(getEpList(req[:params][:pod_id]))),
     page("/episodes/:pod_id/:page", req -> withJsonHeader(getEpList(req[:params][:pod_id], req[:params][:page]))),
     page("/auth/:clientname/:clientsecret", req -> authenticate(req[:params][:clientname], req[:params][:clientsecret])),
